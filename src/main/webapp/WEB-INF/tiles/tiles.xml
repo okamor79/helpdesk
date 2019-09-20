@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="base" template="/WEB-INF/tiles/template/default.jsp">
+        <put-attribute name="title" value="Helpdesk system" />
+        <put-attribute name="header" value="/WEB-INF/tiles/fragments/_header.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="sidebar" value="" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/fragments/_footer.jsp" />
+    </definition>
+
+    <definition name="login" extends="base">
+        <put-attribute name="body" value="/WEB-INF/tiles/forms/_login.jsp" />
+    </definition>
+
+    <definition name="index" extends="base">
+        <put-attribute name="body" value="/WEB-INF/tiles/main/index.jsp" />
+    </definition>
+
+    <definition name="profile" extends="base">
+        <put-attribute name="body" value="/WEB-INF/tiles/forms/userProfile.jsp" />
+    </definition>
+
+    <definition name="settings" template="/WEB-INF/tiles/template/settings.jsp">
+        <put-attribute name="title" value="Helpdesk system. Адмінінстрування" />
+        <put-attribute name="header" value="/WEB-INF/tiles/fragments/_header.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="sidebar" value="" />
+        <put-attribute name="footer" value="/WEB-INF/tiles/fragments/_footer.jsp" />
+<!--        <put-attribute name="sidebar" value="/WEB-INF/tiles/settings/sidebar.jsp" />-->
+<!--        <put-attribute name="body" value="/WEB-INF/tiles/settings/info.jsp" />-->
+    </definition>
+
+    <definition name="settings/info" extends="settings">
+        <put-attribute name="title" value="Helpdesk system. Адмінінстрування" />
+        <put-attribute name="sidebar" value="/WEB-INF/tiles/settings/sidebar.jsp" />
+        <put-attribute name="content" value="/WEB-INF/tiles/settings/info.jsp" />
+    </definition>
+
+    <!--    <definition name="*/users" extends="settings">-->
+<!--        <put-attribute name="title" value="Helpdesk system. Адмінінстрування - КОРИСТУВАЧІ" />-->
+<!--        <put-attribute name="sidebar" value="/WEB-INF/tiles/settings/sidebar.jsp" />-->
+<!--        <put-attribute name="body" value="/WEB-INF/tiles/settings/users.jsp" />-->
+<!--    </definition>-->
+
+
+</tiles-definitions>
