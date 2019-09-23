@@ -63,7 +63,7 @@ public class DefaultController {
 
     @GetMapping("/settings")
     public String settings(Model model) {
-        model.addAttribute("userList", usersService.findAllUsers());
+
         return "settings";
     }
 

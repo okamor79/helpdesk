@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.ldap.core.AttributesMapper;
@@ -107,7 +108,7 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public Page<Users> findFilteredUsersByPage(Pageable pageable, RockyFilter filter) {
-        return null;
+        return usersRepository.findAll(getSpecification(filter), PageRequest.of(pageable.getPageNumber(), filter.getPageSize()));
     }
 
     private Specification<Users> getSpecification(RockyFilter filter) {

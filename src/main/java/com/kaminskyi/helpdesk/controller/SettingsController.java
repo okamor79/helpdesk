@@ -21,7 +21,8 @@ public class SettingsController {
     }
 
     @GetMapping("/users")
-    public String usersSettings() {
+    public String usersSettings(Model model) {
+        model.addAttribute("userList", usersService.findAllUsers());
         return "settings/users";
     }
 
