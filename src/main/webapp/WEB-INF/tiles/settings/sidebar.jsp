@@ -9,8 +9,8 @@
 <%@ include file="/WEB-INF/taglibs.jsp"%>
 
 <ul class="navbar-nav">
-    <li class="nav-item"><a href="" class="nav-link">Користувачі</a></li>
-    <li class="nav-item"><a href="" class="nav-link">Проекти</a></li>
-    <li class="nav-item"><a href="" class="nav-link">Призначення агентів</a></li>
+    <li class="nav-item"><a href="/settings/users" class="nav-link">Користувачі</a></li>
+    <li class="nav-item"><a href="/settings/projects" class="nav-link">Проекти</a></li>
+    <li class="nav-item"><a href="/settings/agents" class="nav-link">Призначення агентів</a></li>
 </ul>
 

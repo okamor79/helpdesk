@@ -8,6 +8,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css">
+
 
     <c:if test="${pageTitle != null}" >
         <tiles:putAttribute name="title" value="${pageTitle}" />
@@ -25,7 +28,7 @@
         <div class="col-sm-2"><br>
             <tiles:insertAttribute name="sidebar"/>
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-10" style="padding: 15px">
             <tiles:insertAttribute name="content"/>
         </div>
     </div>

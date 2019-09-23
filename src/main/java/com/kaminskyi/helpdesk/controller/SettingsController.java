@@ -25,9 +25,19 @@ public class SettingsController {
         return "settings/users";
     }
 
+    @GetMapping("/projects")
+    public String projectsSettings() {
+        return "settings/projects";
+    }
+
+    @GetMapping("/agents")
+    public String agentsSettings() {
+        return "settings/agents";
+    }
+
     @GetMapping("/user/remove/{id}")
     public String removeUser(Model model,  @PathVariable("id") Long id) {
         usersService.removeUser(id);
-        return "redirect:/settings";
+        return "redirect:/settings/users";
     }
 }

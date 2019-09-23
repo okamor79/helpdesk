@@ -1,5 +1,6 @@
 package com.kaminskyi.helpdesk.service.impl;
 
+import com.kaminskyi.helpdesk.dto.RockyFilter;
 import com.kaminskyi.helpdesk.entity.CustomUserDetails;
 import com.kaminskyi.helpdesk.entity.Users;
 import com.kaminskyi.helpdesk.entity.enums.UserRole;
@@ -9,13 +10,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Iterator;
-import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.*;
 
 @Service
 public class UsersServiceImpl implements UsersService {
@@ -94,5 +100,32 @@ public class UsersServiceImpl implements UsersService {
         usersRepository.deleteById(id);
     }
 
+    @Override
+    public Page<Users> findAllUserByPage(Pageable pageable) {
+        return null;
+    }
 
+    @Override
+    public Page<Users> findFilteredUsersByPage(Pageable pageable, RockyFilter filter) {
+        return null;
+    }
+
+    private Specification<Users> getSpecification(RockyFilter filter) {
+        return new Specification<Users>() {
+            @Override
+            public Predicate toPredicate(Root<Users> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                final Collection<Predicate> predicateCollation = new ArrayList<>();
+                for (String t : String.valueOf(filter.toString()).split(" ")) {
+                    RockyFilter rockyFilter = new RockyFilter();
+                    rockyFilter.setSearch(t);
+                    predicateCollation.add(criteriaBuilder.like(root.get("login"), '%' + rockyFilter.getSearch().toString() + '%'));
+                    predicateCollation.add(criteriaBuilder.like(root.get("fullName"), '%' + rockyFilter.getSearch().toString() + '%'));
+                }
+                return criteriaBuilder.and(
+                        criteriaBuilder.or(predicateCollation.toArray(new Predicate[predicateCollation.size()]))
+                );
+            }
+
+        };
+    }
 }
