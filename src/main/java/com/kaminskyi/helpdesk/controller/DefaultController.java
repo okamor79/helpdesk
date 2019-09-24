@@ -28,25 +28,21 @@ public class DefaultController {
     public String index(Model model) {
         usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         userDetails = (CustomUserDetails) usernamePasswordAuthenticationToken.getPrincipal();
-
         usersService.userLogged(userDetails);
-
         model.addAttribute("userName", userDetails.getFullName());
         model.addAttribute("userFullName", userDetails.getFullName());
-//        model.addAttribute("userDepartament", userDetails.getDepartament());
-//        model.addAttribute("userPosition", userDetails.getPosition());
-//        model.addAttribute("userPhone", userDetails.getPhoneNumber());
-//        model.addAttribute("userMail", userDetails.getMail());
-        // + " --> " + userDetails.getAccountName()
-        //model.addAttribute("userAttr", userDetails.getMail());
-
-//        logger.info("Logged by " + this.userDetails.getAccountName() + " (" + this.userDetails.getTitle() + ")");
         return "index";
     }
 
+    @GetMapping("/settings/synchronize")
+    public String synchronize() {
+        usersService.synchronizeUser();
+        return "redirect:/settings";
+    }
+
+
     @GetMapping("/profile")
     public String userProfile(Model model) {
-//        model.addAttribute("userName", userDetails.getFullName());
         model.addAttribute("userFullName", userDetails.getFullName());
         model.addAttribute("userDepartament", userDetails.getDepartament());
         model.addAttribute("userPosition", userDetails.getPosition());
@@ -55,15 +51,9 @@ public class DefaultController {
         return "profile";
     }
 
-    @GetMapping("/synchronize")
-    public String synchronize() {
-        usersService.synchronizeUser();
-        return "redirect:/settings";
-    }
 
     @GetMapping("/settings")
     public String settings(Model model) {
-
         return "settings";
     }
 

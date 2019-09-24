@@ -61,6 +61,9 @@ public class UsersServiceImpl implements UsersService {
                     .login(userDetails.getLogin())
                     .fullName(userDetails.getFullName())
                     .mail(userDetails.getMail())
+                    .department(userDetails.getDepartament())
+                    .position(userDetails.getPosition())
+                    .phone(userDetails.getPhoneNumber())
                     .role(UserRole.ROLE_USER)
                     .lastActivity(calendar.getTime())
                     .build();

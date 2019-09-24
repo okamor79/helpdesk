@@ -23,6 +23,11 @@ public class UserAttributeMapper implements AttributesMapper {
             user.setLogin((String) login.get());
         }
 
+        Attribute phone = attributes.get("telephoneNumber");
+        if (phone != null) {
+            user.setPhone((String) phone.get());
+        }
+
         Attribute mail = attributes.get("mail");
         if (mail != null) {
             user.setMail((String) mail.get());
