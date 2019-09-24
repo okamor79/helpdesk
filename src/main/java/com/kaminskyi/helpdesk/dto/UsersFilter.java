@@ -7,11 +7,9 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RockyFilter {
+public class UsersFilter {
 
     private String search;
-
-    private int pageSize = 20;
 
     @Override
     public String toString() {

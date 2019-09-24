@@ -1,6 +1,6 @@
 package com.kaminskyi.helpdesk.service.impl;
 
-import com.kaminskyi.helpdesk.dto.RockyFilter;
+import com.kaminskyi.helpdesk.dto.UsersFilter;
 import com.kaminskyi.helpdesk.entity.CustomUserDetails;
 import com.kaminskyi.helpdesk.entity.Users;
 import com.kaminskyi.helpdesk.entity.enums.UserRole;
@@ -103,21 +103,22 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public Page<Users> findAllUserByPage(Pageable pageable) {
-        return null;
+
+        return usersRepository.findAll(PageRequest.of(pageable.getPageNumber(), 15));
     }
 
     @Override
-    public Page<Users> findFilteredUsersByPage(Pageable pageable, RockyFilter filter) {
-        return usersRepository.findAll(getSpecification(filter), PageRequest.of(pageable.getPageNumber(), filter.getPageSize()));
+    public Page<Users> findFilteredUsersByPage(Pageable pageable, UsersFilter filter) {
+        return usersRepository.findAll(getSpecification(filter), PageRequest.of(pageable.getPageNumber(), 15));
     }
 
-    private Specification<Users> getSpecification(RockyFilter filter) {
+    private Specification<Users> getSpecification(UsersFilter filter) {
         return new Specification<Users>() {
             @Override
             public Predicate toPredicate(Root<Users> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 final Collection<Predicate> predicateCollation = new ArrayList<>();
                 for (String t : String.valueOf(filter.toString()).split(" ")) {
-                    RockyFilter rockyFilter = new RockyFilter();
+                    UsersFilter rockyFilter = new UsersFilter();
                     rockyFilter.setSearch(t);
                     predicateCollation.add(criteriaBuilder.like(root.get("login"), '%' + rockyFilter.getSearch().toString() + '%'));
                     predicateCollation.add(criteriaBuilder.like(root.get("fullName"), '%' + rockyFilter.getSearch().toString() + '%'));

@@ -1,6 +1,6 @@
 package com.kaminskyi.helpdesk.service;
 
-import com.kaminskyi.helpdesk.dto.RockyFilter;
+import com.kaminskyi.helpdesk.dto.UsersFilter;
 import com.kaminskyi.helpdesk.entity.CustomUserDetails;
 import com.kaminskyi.helpdesk.entity.Users;
 import org.springframework.data.domain.Page;
@@ -24,6 +24,6 @@ public interface UsersService {
 
     Page<Users> findAllUserByPage(Pageable pageable);
 
-    Page<Users> findFilteredUsersByPage(Pageable pageable, RockyFilter filter);
+    Page<Users> findFilteredUsersByPage(Pageable pageable, UsersFilter filter);
 
 }
