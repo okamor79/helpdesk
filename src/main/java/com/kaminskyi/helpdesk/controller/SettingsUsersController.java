@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/settings")
 @SessionAttributes
-public class SettingsController {
+public class SettingsUsersController {
 
     @Autowired
     private UsersService usersService;

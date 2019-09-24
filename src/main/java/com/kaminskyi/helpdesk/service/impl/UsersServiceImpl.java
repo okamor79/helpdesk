@@ -70,6 +70,9 @@ public class UsersServiceImpl implements UsersService {
             user.setLastActivity(calendar.getTime());
             user.setMail(userDetails.getMail());
             user.setFullName(userDetails.getFullName());
+            user.setDepartment(userDetails.getDepartament());
+            user.setPosition(userDetails.getPosition());
+            user.setPhone(userDetails.getPhoneNumber());
             usersRepository.save(user);
         }
     }
