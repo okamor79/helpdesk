@@ -48,6 +48,11 @@
         <put-attribute name="content" value="/WEB-INF/tiles/settings/users.jsp" />
     </definition>
 
+    <definition name="settings/users/edit" extends="settings">
+        <put-attribute name="title" value="Helpdesk system. Адмінінстрування - Редагування користувача"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/settings/usr_edit.jsp"/>
+    </definition>
+
     <definition name="settings/projects" extends="settings">
         <put-attribute name="title" value="Helpdesk system. Адмінінстрування - Проекти" />
         <put-attribute name="content" value="/WEB-INF/tiles/settings/projects.jsp" />

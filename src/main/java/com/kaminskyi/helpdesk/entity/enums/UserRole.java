@@ -1,7 +1,7 @@
 package com.kaminskyi.helpdesk.entity.enums;
 
 public enum UserRole {
-    ROLE_ADMIN("Admin"), ROLE_USER("User"), ROLE_AGENT("Agent"), ROLE_AUDITOR("Auditor");
+    ROLE_ADMIN("Admin"), ROLE_USER("User"), ROLE_AGENT("Agent"), ROLE_AUDITOR("Auditor"), ROLE_SUPERVISOR("Supervisor");
 
     private String roleName;
 

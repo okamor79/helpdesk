@@ -14,6 +14,8 @@ public interface UsersService {
 
     Users findUserByID(Long id);
 
+    Users findUserByLogin(String login);
+
     List<Users> findAllUsers();
 
     void userLogged(CustomUserDetails userDetails);

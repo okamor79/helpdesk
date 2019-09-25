@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ include file="/WEB-INF/taglibs.jsp" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <c:url var="firstUrl" value="/settings/users?page=0&search=${search}" />
 <c:url var="prevUrl" value="/settings/users?page=${currentIndex - 1}&search=${search}" />
@@ -27,7 +26,7 @@
         </a>
     </div>
     <div class="col-sm-4">
-        <form:form method="post" action="/settings/users/search" modelAttribute="searchText">
+        <form:form method="post" action="/settings/users/search">
                 <div class="input-group input-group-sm">
                     <input type="search" name="searchText" class="form-control">
                     <div class="input-group-append">
@@ -43,8 +42,8 @@
     <table class="table table-sm table-striped">
         <thead>
             <tr>
-                <th scope="col" class="text-md-center">Логін</th>
-                <th scope="col" class="text-md-center border-left border-right">ПІБ</th>
+                <th scope="col" class="text-sm-center">Логін</th>
+                <th scope="col" class="text-sm-center border-left border-right">ПІБ</th>
                 <th scope="col" class="border-right text-md-center">Поштова скринька</th>
                 <th scope="col" class="border-right text-md-center">Посада</th>
                 <th scope="col" class="border-right text-md-center">Департамент</th>
@@ -61,11 +60,13 @@
                                     <td>${user.mail}</td>
                                     <td>${user.position}</td>
                                     <td>${user.department}</td>
-                                    <td>${user.phone}</td>
+                                    <td class="text-md-center">${user.phone}</td>
                                     <td class="text-md-center">${user.role}</td>
                                     <td class="text-md-center">
-                                        <a style="text-decoration: none" href="/settings/users/edit/${user.id}"><span class="btn btn-sm btn-success glyphicon glyphicon-pencil" style="color:white"></span></a>
-                                        <a style="text-decoration: none" href="/settings/users/remove/${user.id}"><span class="btn btn-sm btn-danger glyphicon glyphicon-remove" style="color:white"></span></a>
+                                        <a style="text-decoration: none" href="/settings/users/edit/${user.id}"
+                                           class="btn btn-sm btn-success glyphicon  glyphicon-pencil"></a>
+                                        <a style="text-decoration: none" href="/settings/users/remove/${user.id}"
+                                           class="btn btn-sm btn-danger glyphicon glyphicon-remove"></a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -87,7 +88,7 @@
                 <li class="page-item"><a href="${prevUrl}" class="page-link"><span class="glyphicon glyphicon-backward"></span></a></li>
             </c:otherwise>
         </c:choose>
-        <c:forEach var="i" begin="1" end="${endIndex}">
+        <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
             <c:url var="pageUrl"
                    value="/settings/users?page=${i}&search=${search}"/>
             <c:choose>
@@ -112,3 +113,4 @@
     </ul>
     </nav>
 </div>
+

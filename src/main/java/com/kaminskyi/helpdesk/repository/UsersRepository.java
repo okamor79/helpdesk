@@ -13,4 +13,8 @@ public interface UsersRepository extends JpaRepository<Users, Long>, JpaSpecific
     @Query("SELECT u FROM Users u WHERE u.login = :login")
     Users findUserByLogin(@Param("login") String login);
 
+    @Query("SELECT u FROM Users u WHERE u.role='ROLE_AGENT'")
+    Users findAllAgents();
+
+
 }

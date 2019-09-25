@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Builder
@@ -29,4 +30,7 @@ public class Users extends BaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm")
     private Date lastActivity;
+
+    @ManyToMany(mappedBy = "agent", fetch = FetchType.EAGER)
+    private List<Projects> projects;
 }
