@@ -54,6 +54,11 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    public List<Users> findAllAgents() {
+        return usersRepository.findAllAgents();
+    }
+
+    @Override
     public List<Users> findAllUsers() {
         return usersRepository.findAll();
     }
@@ -85,8 +90,8 @@ public class UsersServiceImpl implements UsersService {
         }
     }
 
+    @Override
     public void synchronizeUser() {
-
         List<String> usersFromLDAP = findAllLDAPUsers();
         Iterator iterator = usersFromLDAP.listIterator();
         while (iterator.hasNext()) {
@@ -131,8 +136,8 @@ public class UsersServiceImpl implements UsersService {
                 for (String t : String.valueOf(filter.toString()).split(" ")) {
                     UsersFilter rockyFilter = new UsersFilter();
                     rockyFilter.setSearch(t);
-                    predicateCollation.add(criteriaBuilder.like(root.get("login"), '%' + rockyFilter.getSearch().toString() + '%'));
-                    predicateCollation.add(criteriaBuilder.like(root.get("fullName"), '%' + rockyFilter.getSearch().toString() + '%'));
+                    predicateCollation.add(criteriaBuilder.like(root.get("login"), '%' + rockyFilter.getSearch() + '%'));
+                    predicateCollation.add(criteriaBuilder.like(root.get("fullName"), '%' + rockyFilter.getSearch() + '%'));
                 }
                 return criteriaBuilder.and(
                         criteriaBuilder.or(predicateCollation.toArray(new Predicate[predicateCollation.size()]))

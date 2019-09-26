@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,11 +18,12 @@ public class Projects extends BaseEntity {
     @CheckProjectCode
     @CheckProjectExist
     private String code;
+
     private String title;
     private String description;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Users> agent;
+    private List<Users> agent = new ArrayList<>();
 
     @Column(name = "last_number")
     @ColumnDefault("0")

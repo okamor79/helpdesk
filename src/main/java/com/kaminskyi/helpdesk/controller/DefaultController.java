@@ -2,9 +2,11 @@ package com.kaminskyi.helpdesk.controller;
 
 import com.kaminskyi.helpdesk.dto.UsersFilter;
 import com.kaminskyi.helpdesk.entity.CustomUserDetails;
+import com.kaminskyi.helpdesk.entity.Projects;
 import com.kaminskyi.helpdesk.entity.Users;
 import com.kaminskyi.helpdesk.entity.enums.UserRole;
-import com.kaminskyi.helpdesk.service.impl.UsersServiceImpl;
+import com.kaminskyi.helpdesk.service.ProjectService;
+import com.kaminskyi.helpdesk.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +30,10 @@ import java.util.Map;
 public class DefaultController {
 
     @Autowired
-    private UsersServiceImpl usersService;
+    private UsersService usersService;
+
+    @Autowired
+    private ProjectService projectService;
 
     UserRole userRole;
     Map<String, Object> mapAttributes = new HashMap<>();
@@ -91,13 +98,45 @@ public class DefaultController {
 
     @GetMapping("/settings/projects")
     public String projectsSettings(Model model) {
+        model.addAttribute("projectList", projectService.findAllProjects());
+        model.addAttribute("agents", usersService.findAllAgents());
         model.addAllAttributes(mapAttributes);
         return "settings/projects";
     }
 
-    @GetMapping("/setting/projects/create")
-    public String projectCreate(Model model) {
-        return "settings/projectcreate";
+    @GetMapping("/settings/projects/create")
+    public String projectCreate(Model model, @ModelAttribute("createProject") Projects projects) {
+        model.addAttribute("agents", usersService.findAllAgents());
+        if (projects == null) {
+            model.addAttribute("createProject", new Projects());
+        } else {
+            model.addAttribute("createProject", projects);
+        }
+        model.addAttribute("pageTitle", "Новий проект");
+        model.addAllAttributes(mapAttributes);
+        return "settings/projects/create";
+    }
+
+    @GetMapping("/settings/projects/modify/{id}")
+    public String modifyProject(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("pageTitle", "Редагування проекту");
+        model.addAttribute("agents", usersService.findAllAgents());
+        model.addAttribute("createProject", projectService.findProjectByID(id));
+        model.addAllAttributes(mapAttributes);
+        return "settings/projects/modify";
+    }
+
+    @PostMapping("/settings/projects/create")
+    public String projectCreate(@Valid @ModelAttribute("createProject") Projects projects, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("agents", usersService.findAllAgents());
+            model.addAttribute("createProject", projects);
+            model.addAllAttributes(mapAttributes);
+            return "settings/projects/create";
+        }
+        projects.setLastIssueNumber((long) 0);
+        projectService.save(projects);
+        return "redirect:/settings/projects";
     }
 
     @GetMapping("/settings/agents")
@@ -147,6 +186,5 @@ public class DefaultController {
         usersService.synchronizeUser();
         return "redirect:/settings/users";
     }
-
 
 }

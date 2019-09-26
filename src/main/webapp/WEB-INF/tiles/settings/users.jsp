@@ -39,7 +39,7 @@
 </div>
 <div class="row">&nbsp;</div>
 <div class="row"style="padding: 5px 10px">
-    <table class="table table-sm table-striped">
+    <table class="table table-sm table-hover table-condensed table-bordered" style="font-size: 0.8em">
         <thead>
             <tr>
                 <th scope="col" class="text-sm-center">Логін</th>
@@ -63,10 +63,12 @@
                                     <td class="text-md-center">${user.phone}</td>
                                     <td class="text-md-center">${user.role}</td>
                                     <td class="text-md-center">
-                                        <a style="text-decoration: none" href="/settings/users/edit/${user.id}"
-                                           class="btn btn-sm btn-success glyphicon  glyphicon-pencil"></a>
-                                        <a style="text-decoration: none" href="/settings/users/remove/${user.id}"
-                                           class="btn btn-sm btn-danger glyphicon glyphicon-remove"></a>
+                                        <small><a style="text-decoration: none; color: green"
+                                                  href="/settings/users/edit/${user.id}"
+                                                  class="glyphicon  glyphicon-pencil"></a>&nbsp;&nbsp;
+                                            <a style="text-decoration: none; color: red"
+                                               href="/settings/users/remove/${user.id}"
+                                               class="glyphicon glyphicon-remove"></a></small>
                                     </td>
                                 </tr>
                             </c:forEach>

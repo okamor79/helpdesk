@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.METHOD})
 @Constraint(validatedBy = CheckProjectCodeValidator.class)
 public @interface CheckProjectCode {
-    String message() default "Код проекту може містити лише латинські літери та цифри";
+    String message() default "Код проекту може містити лише великі латинські літери та цифри";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

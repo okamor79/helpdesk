@@ -28,4 +28,8 @@ public interface UsersService {
 
     Page<Users> findFilteredUsersByPage(Pageable pageable, UsersFilter filter);
 
+    List<Users> findAllAgents();
+
+    void synchronizeUser();
+
 }

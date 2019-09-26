@@ -15,10 +15,7 @@ public class CheckProjectCodeValidator implements ConstraintValidator<CheckProje
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        if (!s.contains("-")) {
-            return true;
-        }
-        return false;
+        return s.matches("^[A-Z0-9]+$");
     }
 
 

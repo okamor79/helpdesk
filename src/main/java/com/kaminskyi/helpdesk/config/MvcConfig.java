@@ -1,13 +1,11 @@
 package com.kaminskyi.helpdesk.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
@@ -41,7 +39,7 @@ public class MvcConfig implements WebMvcConfigurer {
     @Bean
     public TilesConfigurer tilesConfigurer() {
         TilesConfigurer configurer = new TilesConfigurer();
-        configurer.setDefinitions(new String[]{"/WEB-INF/tiles/tiles.xml"});
+        configurer.setDefinitions("/WEB-INF/tiles/tiles.xml");
         configurer.setUseMutableTilesContainer(true);
         configurer.setCheckRefresh(true);
         return configurer;
@@ -54,5 +52,8 @@ public class MvcConfig implements WebMvcConfigurer {
         return tilesViewResolver;
     }
 
-
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 }
