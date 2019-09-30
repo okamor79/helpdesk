@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
+@SessionAttributes(types = Users.class)
 @RequestMapping("/")
 public class DefaultController {
 
@@ -63,14 +64,11 @@ public class DefaultController {
         usernamePasswordAuthenticationToken = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         userDetails = (CustomUserDetails) usernamePasswordAuthenticationToken.getPrincipal();
         usersService.userLogged(userDetails);
-        mapAttributes.put("userName", userDetails.getFullName());
-        mapAttributes.put("userFullName", userDetails.getFullName());
-        mapAttributes.put("userLogin", userDetails.getLogin());
-        mapAttributes.put("userDepartment", userDetails.getDepartament());
-        mapAttributes.put("userPosition", userDetails.getPosition());
-        mapAttributes.put("userPhone", userDetails.getPhoneNumber());
-        mapAttributes.put("userRole", usersService.findUserByLogin(userDetails.getLogin()).getRole());
-        model.addAllAttributes(mapAttributes);
+        Users user = usersService.findUserByLogin(userDetails.getLogin());
+        request.getSession().setAttribute("loginedUser", user);
+        model.addAttribute("userRole", user.getRole());
+        model.addAttribute("userID", user.getId());
+        model.addAttribute("userFullName", user.getFullName());
         return "index";
     }
 

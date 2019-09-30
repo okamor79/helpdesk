@@ -73,4 +73,23 @@
         <put-attribute name="content" value="/WEB-INF/tiles/settings/agents.jsp" />
     </definition>
 
+    <definition name="administration" template="/WEB-INF/tiles/template/settings.jsp">
+        <put-attribute name="title" value="Helpdesk system. Адмінінстрування"/>
+        <put-attribute name="header" value="/WEB-INF/tiles/fragments/_header.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="sidebar" value="/WEB-INF/tiles/settings/sidebar.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/tiles/fragments/_footer.jsp"/>
+    </definition>
+
+    <definition name="administration/issue/type" extends="administration">
+        <put-attribute name="title" value="Helpdesk system. Адмінінстрування - Агенти -> Проекти "/>
+        <put-attribute name="content" value="/WEB-INF/tiles/administration/types_issue.jsp"/>
+    </definition>
+
+    <definition name="administration/projects" extends="settings">
+        <put-attribute name="title" value="Helpdesk system. Адмінінстрування - Проекти"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/administration/projects_list.jsp"/>
+    </definition>
+
 </tiles-definitions>
