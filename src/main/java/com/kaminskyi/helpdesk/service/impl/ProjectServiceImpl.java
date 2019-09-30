@@ -20,6 +20,15 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public void update(Projects project) {
+        Projects old = projectRepository.findProjectByCode(project.getCode());
+        if (old.getTitle() != project.getTitle()) {old.setTitle(project.getTitle());}
+        if (old.getDescription() != project.getDescription()) {old.setDescription(project.getDescription());}
+        if (old.getAgent() != project.getAgent()) {old.setAgent(project.getAgent());}
+        projectRepository.save(old);
+    }
+
+    @Override
     public Projects findProjectByID(Long id) {
         return projectRepository.getOne(id);
     }

@@ -7,6 +7,8 @@
 
 <div class="row" style="padding: 25px">
     <form:form action="/settings/projects/modify" method="post" modelAttribute="createProject">
+
+        <c:set var="agentList" value="${createProject.agent}"/>
         <div class="form-group row">
             <label for="code">Символьний код проекту</label>
             <form:input path="code" cssClass="form-control" readonly="true"></form:input>
@@ -23,10 +25,11 @@
             <label for="agent">Агенти</label>
 
             <form:select path="agent" cssClass="form-control" multiple="true">
-                <c:forEach items="${agents}" var="agn">
-                    <form:option value="${agn.id}">${agn.fullName}</form:option>
-                </c:forEach>
+                <form:options items="${agents}" itemValue="id" itemLabel="fullName"/>
             </form:select>
+
+            <span  class="badge badge-light">Для вибору кількох агентів утримуйте натиснутою клавішу CTRL</span>
+
         </div>
         <button type="button" class="btn btn-secondary" onclick="window.location.href='/settings/projects'">Закрити
         </button>

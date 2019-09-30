@@ -11,4 +11,6 @@ public interface ProjectService {
     Projects findProjectByID(Long id);
 
     List<Projects> findAllProjects();
+
+    void update(Projects project);
 }

@@ -23,10 +23,9 @@
         <div class="form-group row">
             <label for="agent">Агенти</label>
             <form:select path="agent" cssClass="form-control" multiple="true">
-                <c:forEach items="${agents}" var="agent">
-                    <form:option value="${agent.id}">${agent.fullName}</form:option>
-                </c:forEach>
+                <form:options items="${agents}" itemValue="id" itemLabel="fullName"/>
             </form:select>
+            <span  class="badge badge-light">Для вибору кількох агентів утримуйте натиснутою клавішу CTRL</span>
         </div>
         <button type="button" class="btn btn-secondary" onclick="window.location.href='/settings/projects'">Закрити
         </button>

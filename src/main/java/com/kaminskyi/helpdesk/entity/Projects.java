@@ -17,6 +17,7 @@ public class Projects extends BaseEntity {
 
     @CheckProjectCode
     @CheckProjectExist
+    @Column(unique=true)
     private String code;
 
     private String title;

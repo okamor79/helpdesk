@@ -126,6 +126,12 @@ public class DefaultController {
         return "settings/projects/modify";
     }
 
+    @PostMapping("/settings/projects/modify")
+    public String postModifyProject(@ModelAttribute("createProject") Projects projects) {
+        projectService.update(projects);
+        return "redirect:/settings/projects";
+    }
+
     @PostMapping("/settings/projects/create")
     public String projectCreate(@Valid @ModelAttribute("createProject") Projects projects, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -154,7 +160,6 @@ public class DefaultController {
 
     @PostMapping("/settings/users/edit")
     public String editUser(@ModelAttribute("user") Users user) {
-        System.out.println(user);
         usersService.save(user);
         return "redirect:/settings/users";
     }
