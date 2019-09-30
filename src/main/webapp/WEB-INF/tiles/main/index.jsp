@@ -16,5 +16,5 @@
             </c:when>
         </c:choose>
     </sec:authorize>
-    <a href="/logout" class="hyperlink">Logout</a>
+
 </div>
