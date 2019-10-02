@@ -37,6 +37,7 @@
                 <input type="password" name="password" class="form-control" id="password" placeholder="Пароль"/>
             </div>
             <button type="submit" class="btn btn-success btn-length">Ввійти</button>
+            <form:errors path="error" cssClass="error"/>
         </form:form>
     </div>
 </div>

@@ -82,12 +82,17 @@
         <put-attribute name="footer" value="/WEB-INF/tiles/fragments/_footer.jsp"/>
     </definition>
 
+    <definition name="administration/users" extends="settings">
+        <put-attribute name="title" value="Helpdesk system. Адмінінстрування - Користувачі"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/administration/users_list.jsp"/>
+    </definition>
+
     <definition name="administration/issue/type" extends="administration">
         <put-attribute name="title" value="Helpdesk system. Адмінінстрування - Агенти -> Проекти "/>
         <put-attribute name="content" value="/WEB-INF/tiles/administration/types_issue.jsp"/>
     </definition>
 
-    <definition name="administration/projects" extends="settings">
+    <definition name="administration/projects" extends="administration">
         <put-attribute name="title" value="Helpdesk system. Адмінінстрування - Проекти"/>
         <put-attribute name="content" value="/WEB-INF/tiles/administration/projects_list.jsp"/>
     </definition>
